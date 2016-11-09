@@ -1,0 +1,27 @@
+{
+  "lang": {
+    "en": "en",
+    "no": "no"
+  },
+  "title_long": {
+    "en": "HaroBoard :: An interactive dashbord to manage your every data need",
+    "no": "HaroPanel :: Et interaktivt panel for å håndtere dine data behov"
+  },
+  "title_short": {
+    "en": "HaroBoard",
+    "no": "HaroPanel"
+  },
+  "description": {
+    "en": "Data managing application",
+    "no": "Data håndteringsapplikasjon"
+  },
+  "author": {
+    "en": "Peter Haro"
+  },
+  "page_url": {
+    "en": "https://peterharo.github.io/"
+  },
+  "page_url_preview_picture": {
+    "en": "https://peterharo.github.io/preview"
+  }
+}

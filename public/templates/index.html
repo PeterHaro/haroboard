@@ -1,0 +1,43 @@
+<!DOCTYPE html>{#
+
+run expand.py in order to generate the proper sources
+-------------------------------------------------
+#}
+<html prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+        <meta name="viewport" content="width=device-width" />
+
+        <title>{{__('title_long')}}</title>
+        <meta itemprop="name"                                      content="{{__('title_short')}}"/>
+        <meta itemprop="description"     name="description"        content="{{__('description')}}"/>
+        <meta itemprop="author"          name="author"             content="{{__('author')}}"/>
+
+        <meta property="og:type"        content="website"/>
+        <meta property="og:title"       content="{{__('title_short')}}"/>
+        <meta property="og:description" content="{{__('description')}}"/>
+        <meta property="og:url"         content="{{__('page_url')}}"/>
+        <meta property="og:image"       content="{{__('page_url_preview_picture')}}"/>
+
+        <link rel="shortcut icon" href="/favicon.ico"/>
+        <link rel="apple-touch-icon" sizes="120x120" href="/iphone-icon.png"/>
+        <link rel="apple-touch-icon" sizes="152x152" href="/ipad-icon.png"/>
+        <link rel="stylesheet" type="text/css" href="/styles/styles.css"/>
+
+        <link rel="alternate" hreflang="x-default" href="{{__('page_url')}}"/>
+        <link rel="alternate" hreflang="no" href="{{__('page_url')}}/no"/>
+        <!-- TODO Add foreach in python script based on possible langs -->
+
+    </head>
+    <body data-lang="{{__('lang')}}">
+
+    <!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+
+
+    </body>
+</html>
