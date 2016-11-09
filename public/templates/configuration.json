@@ -23,5 +23,25 @@
   },
   "page_url_preview_picture": {
     "en": "https://peterharo.github.io/preview"
+  },
+  "navigation_drawer_landing_page": {
+    "en": "Home",
+    "no": "Hjem"
+  },
+  "maps": {
+    "en": "Maps",
+    "no": "Kart"
+  },
+  "monitor": {
+    "en": "Monitor real-time systems",
+    "no": "Overvåk kritiske systemer"
+  },
+  "settings": {
+    "en": "Settings",
+    "no": "Innstillinger"
+  },
+  "help": {
+    "en": "Help",
+    "no": "Hjelp"
   }
 }

@@ -1,8 +1,8 @@
-<!DOCTYPE html>{#
+<!DOCTYPE html><!--{#
 
 run expand.py in order to generate the proper sources
 -------------------------------------------------
-#}
+#}-->
 <html prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
     <head>
         <meta charset="utf-8"/>
@@ -36,11 +36,49 @@ run expand.py in order to generate the proper sources
     <!--[if lt IE 8]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-        <div class="wrapper"> <!-- Hopefully I can reuse this in all elements -->
-            
+        <div class="page-wrapper"> <!-- Hopefully I can reuse this in all elements -->
+            <!-- Navigation drawer :: Correct styling guidelines can be found here https://material.google.com/patterns/navigation-drawer.html#navigation-drawer-content SEE: Permanent-->
+            <div class="navigation-drawer" data-image="assets/images/">
+                <div class="navigation-drawer-wrapper">
+                    <div class="logo">
+                        <a href="{{__('page_url')}}" class="simple-text">
+                            {{__('title_short')}}
+                        </a>
+                    </div>
 
+                    <div class="nav">
+                        <li class="active">
+                            <a href="index.html">
+                                <i class="pe-7s-home"></i><!-- Consider using material design icons -->
+                                <p>{{__('navigation_drawer_landing_page')}}</p>
+                            </a>
+                        </li>
+                          <li>
+                            <a href="monitor.html">
+                                <i class="pe-7s-note2"></i>
+                                <p>{{__('monitor')}}</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="maps.html">
+                                <i class="pe-7s-map-marker"></i>
+                                <p>{{__('maps')}}</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="settings.html">
+                                <i class="pe-7s-settings"></i>
+                                <p>{{__('settings')}}</p>
+                            </a>
+                        </li>
+                        <li class="nav-footer">
+                            <i class="pe-7s-help1"></i>
+                            <p></p>
+                        </li>
+                    </div>
+
+                </div>
+            </div>
         </div>
-
-
     </body>
 </html>

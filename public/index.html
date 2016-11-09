@@ -1,8 +1,8 @@
-<!DOCTYPE html>{#
+<!DOCTYPE html><!--{#
 
 run expand.py in order to generate the proper sources
 -------------------------------------------------
-#}
+#}-->
 <html prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
     <head>
         <meta charset="utf-8"/>
@@ -36,8 +36,49 @@ run expand.py in order to generate the proper sources
     <!--[if lt IE 8]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
+        <div class="page-wrapper"> <!-- Hopefully I can reuse this in all elements -->
+            <!-- Navigation drawer :: Correct styling guidelines can be found here https://material.google.com/patterns/navigation-drawer.html#navigation-drawer-content SEE: Permanent-->
+            <div class="navigation-drawer" data-image="assets/images/">
+                <div class="navigation-drawer-wrapper">
+                    <div class="logo">
+                        <a href="https://peterharo.github.io/" class="simple-text">
+                            HaroBoard
+                        </a>
+                    </div>
 
+                    <div class="nav">
+                        <li class="active">
+                            <a href="index.html">
+                                <i class="pe-7s-home"></i><!-- Consider using material design icons -->
+                                <p>Home</p>
+                            </a>
+                        </li>
+                          <li>
+                            <a href="monitor.html">
+                                <i class="pe-7s-note2"></i>
+                                <p>Monitor real-time systems</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="maps.html">
+                                <i class="pe-7s-map-marker"></i>
+                                <p>Maps</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="settings.html">
+                                <i class="pe-7s-settings"></i>
+                                <p>Settings</p>
+                            </a>
+                        </li>
+                        <li class="nav-footer">
+                            <i class="pe-7s-help1"></i>
+                            <p></p>
+                        </li>
+                    </div>
 
-
+                </div>
+            </div>
+        </div>
     </body>
 </html>
