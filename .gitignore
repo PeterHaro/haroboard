@@ -45,3 +45,9 @@ fabric.properties
 
 # Local dev databases (passwords etc)
 .secret/*
+
+#python stuff
+*.pyc
+
+#sass
+.sass-cache
