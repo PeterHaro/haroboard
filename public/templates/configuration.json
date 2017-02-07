@@ -1,7 +1,8 @@
 {
   "lang": {
     "en": "en",
-    "no": "no"
+    "no": "no",
+    "es": "es"
   },
   "title_long": {
     "en": "HaroBoard :: An interactive dashbord to manage your every data need",
@@ -43,5 +44,23 @@
   "help": {
     "en": "Help",
     "no": "Hjelp"
-  }
+  },
+  "cesium": {
+    "en": "Cesium"
+  },
+  "cesium-viewer": {
+    "en": "Cesium-viewer",
+    "no": "Cesium kartklient"
+  },
+  "dashboard": {
+    "en": "Dashboard",
+    "no": "Panel"
+  },
+  "pages": [
+    "index",
+    "dashboard",
+    "monitor",
+    "maps",
+    "cesium-viewer"
+  ]
 }

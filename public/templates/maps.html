@@ -23,6 +23,17 @@
     <link rel="stylesheet" type="text/css" href="./styles/styles.min.css"/>
     <link rel="stylesheet" type="text/css" href="./styles/pe-icon-7-stroke.css">
     <link rel="stylesheet" type="text/css" href="./styles/libs/bootstrap.min.css">
+    <style>
+        @import url(./libs/haroBoard/maps/Cesium/Widgets/widgets.css);
+
+      /*  html, body, #pure_cesium {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }*/
+    </style>
 
     <!-- OPENLAYERS CSS -->
     <link rel="stylesheet" type="text/css" href="./styles/libs/ol.css"/>
@@ -99,23 +110,34 @@
                                         <li class="tab col s3"><a href="#olmap">OpenLayers</a></li>
                                     </ul>
                                 </div>
-
                             </div>
-
                         </div>
                     </ul>
                 </div>
             </div>
         </nav>
         <div class="content">
-            <div id="map" class="map">
+            <div id="olc" class="map">
                 <input type="button" value="Enable/disable" onclick="javascript:ol3d.setEnabled(!ol3d.getEnabled())"/>
-
             </div>
+                <div id="pb">
+                    <div id="pb_head"><h3>Profile Browser</h3></div>
+                    <div id="pb_list" class="scroll-pane horizontal-only"><p>
+                        <div id="pb_list_items"></div>
+                        </p></div>
+
+                    <div id="pb_toggle">
+                        <input id="myButton" style="border-radius:5px;
+border-bottom-right-radius:5px;" type="button" value="Toggle Orbital Tracks" onClick="data_curtain.toggleMarkers();"/>
+                        <input id="myButton" style="margin-top:5px; border-bottom-left-radius:5px;
+border-bottom-right-radius:5px;" type="button" value="Toggle Day/Night Orbits" onClick="data_curtain.toggleDN();"/>
+                    </div>
+                </div>
+
+                <div id="cesiumContainer"></div>
+            <div id="olmap" class="map">Test 3</div>
         </div>
-
     </div>
-
 </div>
 </body>
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
@@ -126,4 +148,12 @@
 <script src="./libs/haroBoard/maps/Cesium/Cesium.js"></script>
 <script src="./libs/haroBoard/maps/openlayers/ol3cesium.js"></script>
 <script src="./libs/haroBoard/maps/map.js"></script>
+<script src="./libs/haroBoard/maps/data_curtains_refactored.js"></script>
+
+<script>
+        var curtain = data_curtain;
+        curtain.init();
+
+</script>
+
 </html>

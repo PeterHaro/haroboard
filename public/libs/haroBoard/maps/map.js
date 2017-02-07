@@ -25,7 +25,7 @@ var overlay = new ol.layer.Tile({
 
 var ol2d = new ol.Map({
   layers: [layer, overlay],
-  target: 'map',
+  target: 'olc',
   view: view
 });
 

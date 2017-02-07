@@ -52,7 +52,10 @@ class Expander(object):
         if self.custom_configuration_file is not None:
             if self.custom_configuration_file[index] is not None:
                 return self.custom_configuration_file[index]
-        return "" if self.configuration_file[index] is None else self.configuration_file[index]
+        try:
+            return "" if self.configuration_file[index] is None else self.configuration_file[index]
+        except KeyError:
+            return ""
 
 if __name__ == "__main__":
     Expander = Expander("../public/templates/configuration.json")

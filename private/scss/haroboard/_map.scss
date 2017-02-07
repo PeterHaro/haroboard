@@ -1,5 +1,11 @@
 #map {
-  position: relative;
+  position: absolute;
   width: 100%;
   height: calc(100% - 60px);
+}
+
+#pure_cesium {
+  position: absolute;
+  width: 100%;
+  height: calc(100%- 60px);
 }
