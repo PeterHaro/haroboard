@@ -282,3 +282,17 @@ $red-navbar:                lighten($new-red, 10%);
 $tabs-underline-color: $primary-color-light !default;
 $tabs-text-color: $primary-color !default;
 $tabs-bg-color: #fff !default;
+
+
+// 18. Hamburger
+// ==========================================================================
+
+$hamburger-width-large:  100 px;
+$hamburger-width-medium: 50 px;
+$hamburger-width-small:  30 px;
+$hamburger-width-tiny:   10 px;
+
+$hamburger-height-large: 10 px;
+$hamburger-height-medium: 5 px;
+$hamburger-height-small:  3 px;
+$hamburger-height-tiny:   1 px;

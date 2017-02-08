@@ -1,0 +1,235 @@
+.material-design-hamburger button {
+  display: block;
+  border: none;
+  background: none;
+}
+
+.material-design-hamburger__icon {
+  padding: 3rem 1rem;
+  cursor: pointer;
+}
+
+.material-design-hamburger__layer {
+  display: block;
+  width: 50px;
+  height: 5px;
+  background: #111;
+  position: relative;
+  -webkit-animation-duration: 300ms;
+  animation-duration: 300ms;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+
+    &[data-color="blue"]{
+        @include background-color-setter($new-dark-blue);
+    }
+    &[data-color="azure"]{
+        @include background-color-setter($new-blue);
+    }
+    &[data-color="green"]{
+        @include background-color-setter($new-green);
+    }
+    &[data-color="orange"]{
+        @include background-color-setter($new-orange);
+    }
+    &[data-color="red"]{
+        @include background-color-setter($new-red);
+    }
+    &[data-color="purple"]{
+        @include background-color-setter($new-purple);
+    }
+    &[size="large"] {
+      @include hamburger-size($hamburger-width-large, $hamburger-height-large);
+    }
+    &[size="medium"] {
+      @include hamburger-size($hamburger-width-medium, $hamburger-height-medium);
+    }
+    &[size="small"] {
+      @include hamburger-size($hamburger-width-small, $hamburger-height-small);
+    }
+    &[size="tiny"] {
+      @include hamburger-size($hamburger-width-tiny, $hamburger-height-tiny);
+    }
+}
+
+.material-design-hamburger__layer:before, .material-design-hamburger__layer:after {
+  display: block;
+  width: inherit;
+  height: 5px;
+  position: absolute;
+  background: inherit;
+  left: 0;
+  content: '';
+  -webkit-animation-duration: 300ms;
+  animation-duration: 300ms;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+}
+
+.material-design-hamburger__layer:before {
+  bottom: 200%;
+}
+
+.material-design-hamburger__layer:after {
+  top: 200%;
+}
+
+.material-design-hamburger__icon--to-arrow {
+  -webkit-animation-name: material-design-hamburger__icon--slide;
+  animation-name: material-design-hamburger__icon--slide;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+.material-design-hamburger__icon--to-arrow:before {
+  -webkit-animation-name: material-design-hamburger__icon--slide-before;
+  animation-name: material-design-hamburger__icon--slide-before;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+.material-design-hamburger__icon--to-arrow:after {
+  -webkit-animation-name: material-design-hamburger__icon--slide-after;
+  animation-name: material-design-hamburger__icon--slide-after;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+.material-design-hamburger__icon--from-arrow {
+  -webkit-animation-name: material-design-hamburger__icon--slide-from;
+  animation-name: material-design-hamburger__icon--slide-from;
+}
+
+.material-design-hamburger__icon--from-arrow:before {
+  -webkit-animation-name: material-design-hamburger__icon--slide-before-from;
+  animation-name: material-design-hamburger__icon--slide-before-from;
+}
+
+.material-design-hamburger__icon--from-arrow:after {
+  -webkit-animation-name: material-design-hamburger__icon--slide-after-from;
+  animation-name: material-design-hamburger__icon--slide-after-from;
+}
+
+@-webkit-keyframes material-design-hamburger__icon--slide {
+  0% {
+  }
+  100% {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+}
+
+@keyframes material-design-hamburger__icon--slide {
+  0% {
+  }
+  100% {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+}
+
+@-webkit-keyframes material-design-hamburger__icon--slide-before {
+  0% {
+  }
+  100% {
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    margin: 3% 37%;
+    width: 75%;
+  }
+}
+
+@keyframes material-design-hamburger__icon--slide-before {
+  0% {
+  }
+  100% {
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    margin: 3% 37%;
+    width: 75%;
+  }
+}
+
+@-webkit-keyframes material-design-hamburger__icon--slide-after {
+  0% {
+  }
+  100% {
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    margin: 3% 37%;
+    width: 75%;
+  }
+}
+
+@keyframes material-design-hamburger__icon--slide-after {
+  0% {
+  }
+  100% {
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    margin: 3% 37%;
+    width: 75%;
+  }
+}
+
+@-webkit-keyframes material-design-hamburger__icon--slide-from {
+  0% {
+    -webkit-transform: rotate(-180deg);
+    transform: rotate(-180deg);
+  }
+  100% {
+  }
+}
+
+@keyframes material-design-hamburger__icon--slide-from {
+  0% {
+    -webkit-transform: rotate(-180deg);
+    transform: rotate(-180deg);
+  }
+  100% {
+  }
+}
+
+@-webkit-keyframes material-design-hamburger__icon--slide-before-from {
+  0% {
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    margin: 3% 37%;
+    width: 75%;
+  }
+  100% {
+  }
+}
+
+@keyframes material-design-hamburger__icon--slide-before-from {
+  0% {
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    margin: 3% 37%;
+    width: 75%;
+  }
+  100% {
+  }
+}
+
+@-webkit-keyframes material-design-hamburger__icon--slide-after-from {
+  0% {
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    margin: 3% 37%;
+    width: 75%;
+  }
+  100% {
+  }
+}
+
+@keyframes material-design-hamburger__icon--slide-after-from {
+  0% {
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    margin: 3% 37%;
+    width: 75%;
+  }
+  100% {
+  }
+}
