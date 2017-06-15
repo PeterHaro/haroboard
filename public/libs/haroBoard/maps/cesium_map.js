@@ -6,6 +6,11 @@ var baselayerInjector = new CesiumBaseLayerInjection();
 baselayerInjector.init();
 var layers = cesiumWidget.scene.imageryLayers;
 
+var now = Cesium.JulianDate.now();
+var clock = new Cesium.Clock({
+    currentTime: now
+});
+
 var baseLayerPicker = new Cesium.BaseLayerPicker("baseLayerPickerContainer", {
     globe: cesiumWidget.scene,
     imageryProviderViewModels: baselayerInjector.getImageryViewModels(),
@@ -58,7 +63,7 @@ if (allLayers.length > 0) {
     if (latView !== '-78.176832746519') {
         var includeOnly = true;
         initLayers(includeOnly);
-        viewer.camera.flyTo({
+        cesiumWidget.camera.flyTo({
             destination: Cesium.Cartesian3.fromDegrees(latView, lonView, zoomView)
         });
     } else {
@@ -447,7 +452,7 @@ function loadGIBS(layerId, selectedDate, format, zoomLevel) {
      */
     //console.log(zoomLevel + ' = ' + tileID);
 
-    var src = viewer.imageryLayers.addImageryProvider(new Cesium.WebMapTileServiceImageryProvider({
+    var src = cesiumWidget.imageryLayers.addImageryProvider(new Cesium.WebMapTileServiceImageryProvider({
         // url: "//map1.vis.earthdata.nasa.gov/wmts-geo/wmts.cgi?TIME=" + selectedDate,
         url: "http://gibs.earthdata.nasa.gov/wmts/epsg3857/best/wmts.cgi?TIME=" + selectedDate,
         layer: layerId,
@@ -467,7 +472,7 @@ function loadGIBS(layerId, selectedDate, format, zoomLevel) {
 }
 
 function loadWmts(layerId, geoDataSrc, geoLayers) {
-    var src = viewer.imageryLayers.addImageryProvider(new Cesium.WebMapTileServiceImageryProvider({
+    var src = cesiumWidget.imageryLayers.addImageryProvider(new Cesium.WebMapTileServiceImageryProvider({
         url: geoDataSrc,
         layers: geoLayers,
         style: "",
@@ -486,7 +491,7 @@ function loadWmts(layerId, geoDataSrc, geoLayers) {
 function loadWms(layerId, geoDataSrc, geoLayers, noFeatures) {
     var src;
     if (noFeatures) {
-        src = viewer.imageryLayers.addImageryProvider(new Cesium.WebMapServiceImageryProvider({
+        src = cesiumWidget.imageryLayers.addImageryProvider(new Cesium.WebMapServiceImageryProvider({
             url: geoDataSrc,
             layers: geoLayers,
             sourceUri: geoDataSrc,
@@ -498,7 +503,7 @@ function loadWms(layerId, geoDataSrc, geoLayers, noFeatures) {
             }
         }));
     } else {
-        src = viewer.imageryLayers.addImageryProvider(new Cesium.WebMapServiceImageryProvider({
+        src = cesiumWidget.imageryLayers.addImageryProvider(new Cesium.WebMapServiceImageryProvider({
             url: geoDataSrc,
             layers: geoLayers,
             sourceUri: geoDataSrc,
@@ -514,7 +519,7 @@ function loadWms(layerId, geoDataSrc, geoLayers, noFeatures) {
 }
 
 function loadOsmLayer(layerId, geoDataSrc) {
-    var src = viewer.imageryLayers.addImageryProvider(new Cesium.createOpenStreetMapImageryProvider({
+    var src = cesiumWidget.imageryLayers.addImageryProvider(new Cesium.createOpenStreetMapImageryProvider({
         url: geoDataSrc
         //credit : source
     }));
@@ -523,7 +528,7 @@ function loadOsmLayer(layerId, geoDataSrc) {
 }
 
 function loadCartoDB(layerId, geoDataSrc) {
-    var src = viewer.imageryLayers.addImageryProvider(new Cesium.UrlTemplateImageryProvider({
+    var src = cesiumWidget.imageryLayers.addImageryProvider(new Cesium.UrlTemplateImageryProvider({
         url: geoDataSrc
     }));
     activeLayers[layerId] = src;
@@ -534,19 +539,19 @@ function loadBingLayer(layerId, geoDataSrc) {
     var src, bingUrl = '//dev.virtualearth.net',
         bingKey = 'AiQDjsWpddVOFEnVY6j4Jb0S0Hoy9QMa30rvbZT1A8qd0it10NkYAgvb5sa3OeLw';
     if (geoDataSrc == 'AERIAL') {
-        src = viewer.imageryLayers.addImageryProvider(new Cesium.BingMapsImageryProvider({
+        src = cesiumWidget.imageryLayers.addImageryProvider(new Cesium.BingMapsImageryProvider({
             url: bingUrl,
             key: bingKey,
             mapStyle: Cesium.BingMapsStyle.AERIAL
         }));
     } else if (geoDataSrc == 'AERIAL_WITH_LABELS') {
-        src = viewer.imageryLayers.addImageryProvider(new Cesium.BingMapsImageryProvider({
+        src = cesiumWidget.imageryLayers.addImageryProvider(new Cesium.BingMapsImageryProvider({
             url: bingUrl,
             key: bingKey,
             mapStyle: Cesium.BingMapsStyle.AERIAL_WITH_LABELS
         }));
     } else {
-        src = viewer.imageryLayers.addImageryProvider(new Cesium.BingMapsImageryProvider({
+        src = cesiumWidget.imageryLayers.addImageryProvider(new Cesium.BingMapsImageryProvider({
             url: bingUrl,
             key: bingKey,
             mapStyle: Cesium.BingMapsStyle.ROADS
@@ -678,7 +683,7 @@ function modMarkers(layerId, geoData, markerImg, markerScale, markerLabel, noLis
         $('.markers li').click(function () {
             var lon = $(this).attr('data-lon');
             var lat = $(this).attr('data-lat');
-            viewer.camera.flyTo({
+            cesiumWidget.camera.flyTo({
                 destination: Cesium.Cartesian3.fromDegrees(lon, lat, 3000.0)
             });
         });
@@ -715,7 +720,7 @@ function loadArcGisLayer(layerId, geoDataSrc, geoLayers, noFeatures, format) {
     var src;
     if (noFeatures) {
         //console.log('NO FEATURES FOR YOU!');
-        src = viewer.imageryLayers.addImageryProvider(new Cesium.ArcGisMapServerImageryProvider({
+        src = cesiumWidget.imageryLayers.addImageryProvider(new Cesium.ArcGisMapServerImageryProvider({
             url: geoDataSrc,
             format: format,
             enablePickFeatures: false,
@@ -723,7 +728,7 @@ function loadArcGisLayer(layerId, geoDataSrc, geoLayers, noFeatures, format) {
             tilingScheme: new Cesium.WebMercatorTilingScheme()
         }));
     } else {
-        src = viewer.imageryLayers.addImageryProvider(new Cesium.ArcGisMapServerImageryProvider({
+        src = cesiumWidget.imageryLayers.addImageryProvider(new Cesium.ArcGisMapServerImageryProvider({
             url: geoDataSrc,
             format: format,
             enablePickFeatures: true,
@@ -740,11 +745,11 @@ function loadGeoJson(layerId, geoDataSrc, markerLabel, markerScale, markerImg, z
     // console.log('load geojson');
     new Cesium.GeoJsonDataSource.load(geoDataSrc).then(function (geoData) {
         modMarkers(layerId, geoData, markerImg, markerScale, markerLabel, noList);
-        viewer.dataSources.add(geoData);
+        cesiumWidget.dataSources.add(geoData);
         activeLayers[layerId] = geoData;
         if (zoom) {
             if (zoom === true) {
-                viewer.flyTo(geoData);
+                cesiumWidget.flyTo(geoData);
             } else {
                 $('.cesium-home-button').trigger('click');
             }
@@ -768,11 +773,11 @@ function loadKml(layerId, geoDataSrc, proxy, zoom, markerImg, markerScale, marke
             if (markerMod) modMarkers(geoData, markerImg, markerScale, markerLabel);
             //if (layerId.indexOf("mrm-") >= 0) modMRM(geoData);
 
-            viewer.dataSources.add(geoData); // add to map
+            cesiumWidget.dataSources.add(geoData); // add to map
             activeLayers[layerId] = geoData; // store for removal
             /* if (zoom) {
              if (zoom === true) {
-             viewer.flyTo(geoData);
+             cesiumWidget.flyTo(geoData);
              } else {
              $('.cesium-home-button').trigger('click');
              }
@@ -786,11 +791,11 @@ function loadKml(layerId, geoDataSrc, proxy, zoom, markerImg, markerScale, marke
             if (markerMod) {
                 modMarkers(geoData, markerImg, markerScale, markerLabel);
             } // end markerMod
-            viewer.dataSources.add(geoData);
+            cesiumWidget.dataSources.add(geoData);
             activeLayers[layerId] = geoData;
             /* if (zoom) {
              if (zoom === true) {
-             viewer.flyTo(geoData);
+             cesiumWidget.flyTo(geoData);
              } else {
              $('.cesium-home-button').trigger('click');
              }
@@ -806,7 +811,7 @@ function loadKml(layerId, geoDataSrc, proxy, zoom, markerImg, markerScale, marke
 function removeImagery(layerId) {
     var src = activeLayers[layerId];
     delete activeLayers[layerId];
-    viewer.imageryLayers.remove(src, false);
+    cesiumWidget.imageryLayers.remove(src, false);
 }
 
 // REMOVE LAYERS
@@ -824,7 +829,7 @@ function disableLayer(l) {
     } else {
         var src = activeLayers[layerId];
         delete activeLayers[layerId];
-        viewer.dataSources.remove(src);
+        cesiumWidget.dataSources.remove(src);
     }
     if (mlt === ("geojson") || mlt === ("kml")) {
         $('.' + layerId + '-tree').removeClass('active');
@@ -955,7 +960,6 @@ function initDetails(layerId, layerType, details, source, sourceUrl, geoDataSrc)
     if (layerType == ('arcgis-layer') || layerType == ('arcgis-base-layer')) {
         $('<div class="header"><i class="fa fa-fw fa-file-o"></i> Data Source</div><span>ArcGIS MapServer<br><a target="_blank" rel="nofollow" href="' + geoDataSrc + '/legend">Map Legend</a> &bull; <a target="_blank" rel="nofollow" href="' + geoDataSrc + '">MapServer Information</a></span>>').appendTo(list);
     }
-    $('<div class="header"><i class="fa fa-share-square-o fa-fw"></i> Share This Layer</div><span>Use this url to share this layer: <a href="' + homeURL + 'index.html?layersOn=' + layerId + '" target="_self">Share Link</a></span><div class="header"><i class="fa fa-exclamation-triangle fa-fw"></i> Report Error</div><span>If you are experiencing problems loading this layer, or you would like to suggest corrections, comments, or concerns, please email me using this link: <a href="mailto:jim@climateviewer.com?subject=Climate Viewer broken link - ' + layerId + '&amp;body=Unfortunately this ( ' + geoDataSrc + ' ) URL is not working properly, please look into it. Sent from http://climateviewer.org/3D/" target="_self">Report Error</a></span>').appendTo(list);
 
 }
 
@@ -989,3 +993,61 @@ $('#active-layers-toggle').toggle(
         $('#map-layers').show();
     }
 );
+
+//TIME PICKER REMOVE ME SOON
+
+// DATE PICKER
+var date = new Date();
+date.setDate(date.getDate() - 1);
+var yesterday = Cesium.JulianDate.fromDate(date);
+var startdate = Cesium.JulianDate.toDate(yesterday);
+
+var $input = $('#datepicker').pickadate({
+    format: 'mmmm d, yyyy',
+    formatSubmit: 'yyyy-mm-dd',
+    min: [2002, 6, 1],
+    max: Cesium.JulianDate.now(),
+    container: '#datepicker-container',
+    // editable: true,
+    closeOnSelect: true,
+    closeOnClear: false,
+    selectYears: true,
+    selectMonths: true
+});
+
+var picker = $input.pickadate('picker');
+picker.set('select', startdate);
+picker.on({
+    set: function () {
+        var selectedDate = picker.get('select', 'yyyy-mm-dd');
+        //console.log(selectedDate);
+        $('.nasa-gibs.active').each(function () {
+            loadGIBS($(this).attr('id'), selectedDate, $(this).attr('data-format'), $(this).attr('data-zoom'));
+        });
+    }
+});
+var start = picker.get('select', 'yyyy-mm-dd');
+
+// SET PICKER DATE WHEN YOU SLIDE TIMELINE
+var previousTime = null;
+var isoDate = function (isoDateTime) {
+    return isoDateTime.split("T")[0];
+};
+var isoDateTime = clock.currentTime.toString();
+var time = "TIME=" + isoDate(isoDateTime);
+var onClockUpdate = _.throttle(function () {
+    isoDateTime = clock.currentTime.toString();
+    time = isoDate(isoDateTime);
+    if (time !== previousTime) {
+        previousTime = time;
+        picker.set('select', time, {
+            format: 'yyyy-mm-dd'
+        });
+    }
+}, 250, {
+    leading: true,
+    trailing: true
+});
+
+cesiumWidget.clock.onTick.addEventListener(onClockUpdate);
+onClockUpdate();

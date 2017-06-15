@@ -1,7 +1,6 @@
 import json
 
 from flask import Flask
-from flask import jsonify
 from flask import render_template
 
 app = Flask(__name__, static_folder="./../../public", template_folder="./templates")

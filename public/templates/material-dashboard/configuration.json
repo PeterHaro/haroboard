@@ -1,0 +1,66 @@
+{
+  "lang": {
+    "en": "en",
+    "no": "no",
+    "es": "es"
+  },
+  "title_long": {
+    "en": "HaroBoard :: An interactive dashbord to manage your every data need",
+    "no": "HaroPanel :: Et interaktivt panel for å håndtere dine data behov"
+  },
+  "title_short": {
+    "en": "HaroBoard",
+    "no": "HaroPanel"
+  },
+  "description": {
+    "en": "Data managing application",
+    "no": "Data håndteringsapplikasjon"
+  },
+  "author": {
+    "en": "Peter Haro"
+  },
+  "page_url": {
+    "en": "https://peterharo.github.io/"
+  },
+  "page_url_preview_picture": {
+    "en": "https://peterharo.github.io/preview"
+  },
+  "navigation_drawer_landing_page": {
+    "en": "Home",
+    "no": "Hjem"
+  },
+  "maps": {
+    "en": "Maps",
+    "no": "Kart"
+  },
+  "monitor": {
+    "en": "Monitor real-time systems",
+    "no": "Overvåk kritiske systemer"
+  },
+  "settings": {
+    "en": "Settings",
+    "no": "Innstillinger"
+  },
+  "help": {
+    "en": "Help",
+    "no": "Hjelp"
+  },
+  "cesium": {
+    "en": "Cesium"
+  },
+  "cesium-viewer": {
+    "en": "Cesium-viewer",
+    "no": "Cesium kartklient"
+  },
+  "dashboard": {
+    "en": "Dashboard",
+    "no": "Panel"
+  },
+  "pages": [
+    "index",
+    "dashboard",
+    "monitor",
+    "maps",
+    "cesium-viewer"
+  ]
+}
