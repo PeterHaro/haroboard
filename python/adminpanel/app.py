@@ -1,3 +1,4 @@
+import json
 import os
 
 from flask import Flask
@@ -12,6 +13,7 @@ app = Flask(__name__, static_folder="./../../public", template_folder="./templat
 def index():
     return render_template("index.html")
 
+
 @app.route("/create_new_site")
 def new_site():
     return render_template("create_new_site.html")
@@ -24,8 +26,9 @@ def get_immediate_subdirectories(a_dir):
 
 @app.route("/registeredprojects")
 def get_registered_projects():
-    return get_immediate_subdirectories("./../templates/")
+    print get_immediate_subdirectories("./../../public/templates/")
+    return json.dumps(get_immediate_subdirectories("./../../public/templates/"))
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="127.0.0.1", port=8080, threaded=True, debug=True)

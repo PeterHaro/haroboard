@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Dashboard manager</title>
 
-        <!-- Materializecss compiled and minified CSS -->
+    <!-- Materializecss compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
     <!--Import Google Icon Font-->
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -13,76 +13,81 @@
 
     <style>
         .btn, .btn-large {
-  background-color: #2196F3;
-}
+            background-color: #2196F3;
+        }
 
-button:focus {
-   outline: none;
-   background-color: #2196F3;
-}
+        button:focus {
+            outline: none;
+            background-color: #2196F3;
+        }
 
-.btn:hover, .btn-large:hover {
-   background-color: #64b5f6;
-}
+        .btn:hover, .btn-large:hover {
+            background-color: #64b5f6;
+        }
 
     </style>
 
 </head>
 <body>
 <div class="section grey lighten-5">
-   <div class="container">
-      <div class="row">
-         <div class="col l6 m10 s12 offset-l3 offset-m1">
-            <h3 class="light center-align blue-text">Sign up form</h3>
-            <div class="card">
-               <div class="card-content">
+    <div class="container">
+        <div class="row">
+            <div class="col l6 m10 s12 offset-l3 offset-m1">
+                <h3 class="light center-align blue-text">Create new dashboard</h3>
+                <div class="card hoverable">
+                    <div class="card-content">
+                        <ul data-method="GET" class="stepper horizontal">
+                            <li class="step active">
+                                <div class="step-title waves-effect waves-dark">Select name</div>
+                                <div class="step-content">
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            <input id="site_name" name="site_name" type="text" class="validate" required>
+                                            <label for="site_name">Please input the dashboard name</label>
+                                        </div>
+                                    </div>
+                                    <div class="step-actions">
+                                        <button class="waves-effect waves-dark btn next-step"
+                                                data-feedback="validateSiteName">Continue
+                                        </button>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="step">
+                                <div class="step-title waves-effect waves-dark">Step 2</div>
+                                <div class="step-content">
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            <input id="password" name="password" type="password" class="validate"
+                                                   required>
+                                            <label for="password">Your password</label>
+                                        </div>
+                                    </div>
+                                    <div class="step-actions">
+                                        <button class="waves-effect waves-dark btn next-step">CONTINUE</button>
+                                        <button class="waves-effect waves-dark btn-flat previous-step">BACK</button>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="step">
+                                <div class="step-title waves-effect waves-dark">Callback</div>
+                                <div class="step-content">
+                                    Unfortunately callback loading screen is not working in here =( I'll make a github
+                                    page soon!
+                                    <div class="step-actions">
+                                        <button class="waves-effect waves-dark btn next-step" data-feedback="anyThing">
+                                            ENDLESS CALLBACK!
+                                        </button>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
 
-                  <ul data-method="GET" class="stepper horizontal">
-                     <li class="step active">
-                        <div class="step-title waves-effect waves-dark">E-mail</div>
-                        <div class="step-content">
-                           <div class="row">
-                              <div class="input-field col s6">
-                                 <input id="email" name="email" type="email" class="validate" required>
-                                 <label for="first_name">Your e-mail</label>
-                              </div>
-                           </div>
-                           <div class="step-actions">
-                              <button class="waves-effect waves-dark btn next-step" data-feedback="anyThing">Continue</button>
-                           </div>
-                        </div>
-                     </li>
-                     <li class="step">
-                        <div class="step-title waves-effect waves-dark">Step 2</div>
-                        <div class="step-content">
-                           <div class="row">
-                              <div class="input-field col s6">
-                                 <input id="password" name="password" type="password" class="validate" required>
-                                 <label for="password">Your password</label>
-                              </div>
-                           </div>
-                           <div class="step-actions">
-                              <button class="waves-effect waves-dark btn next-step">CONTINUE</button>
-                              <button class="waves-effect waves-dark btn-flat previous-step">BACK</button>
-                           </div>
-                        </div>
-                     </li>
-                     <li class="step">
-                        <div class="step-title waves-effect waves-dark">Callback</div>
-                        <div class="step-content">
-                          Unfortunately callback loading screen is not working in here =( I'll make a github page soon!
-                           <div class="step-actions">
-                              <button class="waves-effect waves-dark btn next-step" data-feedback="anyThing">ENDLESS CALLBACK!</button>
-                           </div>
-                        </div>
-                     </li>
-                  </ul>
-
-               </div>
+                    </div>
+                </div>
             </div>
-         </div>
-      </div>
-   </div>
+        </div>
+    </div>
 </div>
 </body>
 
@@ -94,17 +99,26 @@ button:focus {
 <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
 <!--Import Materialize-Stepper JavaScript -->
 <script src="./../../../public/libs/materialize-stepper-2.1.4/materialize-stepper.min.js"></script>
+<!-- Haroboard Utility -->
+<script src="./../../../public/libs/haroBoard/haroboardUtility.js"></script>
 <!-- Dashboard manager -->
 <script src="./../../../public/libs/haroBoard/dashboard/dashboard_manager.js"></script>
 <script>
 
-function anyThing() {
-  setTimeout(function(){ $('.stepper').nextStep(); }, 1500);
-}
+    function validateSiteName() {
+        var currentSiteName = document.getElementById("site_name").value;
+        if(DashboardManager.doesSiteAlreadyExist(currentSiteName)) {
+            //RAISE ERROR SITE ALREADY EXIST
+            $('.stepper').destroyFeedback();
+            $('#site_name').showError("Site already exist");
+        } else {
+            $('.stepper').nextStep();
+        }
+    }
 
-$(function(){
-   $('.stepper').activateStepper();
-});
+    $(function () {
+        $('.stepper').activateStepper();
+    });
 
 </script>
 
