@@ -22,7 +22,7 @@ function Button(text, buttonType) {
     this.isDisabled = false;
     this.text = text;
     this.buttonType = buttonType;
-    this.logo;
+    this.logo = null;
 }
 
 function ListItemWithLink(name) {

@@ -11,7 +11,9 @@
     <!--Import Materialize-Stepper CSS -->
     <link rel="stylesheet" href="./../../../public/libs/materialize-stepper-2.1.4/materialize-stepper.min.css">
 
+    <!-- //TODO MOVE EVERYTHING HERE TO SCSS -->
     <style>
+
         .btn, .btn-large {
             background-color: #2196F3;
         }
@@ -23,6 +25,10 @@
 
         .btn:hover, .btn-large:hover {
             background-color: #64b5f6;
+        }
+
+        #navbar_info {
+            display: none;
         }
 
     </style>
@@ -42,7 +48,8 @@
                                 <div class="step-content">
                                     <div class="row">
                                         <div class="input-field col s6">
-                                            <input id="site_name" name="site_name" type="text" class="validate" required>
+                                            <input id="site_name" name="site_name" type="text" class="validate"
+                                                   required>
                                             <label for="site_name">Please input the dashboard name</label>
                                         </div>
                                     </div>
@@ -54,8 +61,39 @@
                                 </div>
                             </li>
                             <li class="step">
-                                <div class="step-title waves-effect waves-dark">Step 2</div>
+                                <div class="step-title waves-effect waves-dark">Navbar</div>
                                 <div class="step-content">
+                                    The navbar is an important part of personalizing your site, however, it is not
+                                    required for the dashboard to work
+                                    <p>
+                                        <input type="checkbox" id="should_use_navbar"/>
+                                        <label for="should_use_navbar">Use Navbar</label>
+                                    </p>
+                                    <!-- NAVBAR INFO -->
+                                    <br>
+                                    <div class="row" id="navbar_info">
+                                        <form class="col s12">
+                                            <div class="row">
+                                                <div class="input-field col s6">
+                                                    <i class="material-icons prefix">title</i>
+                                                    <input placeholder="brand_name" id="title_prefix" type="text" class="validate">
+                                                    <label for="title_prefix">Navbar title</label>
+                                                </div>
+                                                <!--                                                 <form action="#">
+                                                    <div class="file-field input-field">
+                                                        <div class="btn">
+                                                            <span>Logo</span>
+                                                            <input type="file">
+                                                        </div>
+                                                        <div class="file-path-wrapper">
+                                                            <input class="file-path validate" type="text">
+                                                        </div>
+                                                    </div>
+                                                </form> -->
+                                            </div>
+                                        </form>
+                                    </div>
+
                                     <div class="row">
                                         <div class="input-field col s6">
                                             <input id="password" name="password" type="password" class="validate"
@@ -105,9 +143,13 @@
 <script src="./../../../public/libs/haroBoard/dashboard/dashboard_manager.js"></script>
 <script>
 
+    //
+    // validateSiteName
+    // Validates the site name, for instance check if it exists, supposed to more, raise error if exists etc
+    //
     function validateSiteName() {
         var currentSiteName = document.getElementById("site_name").value;
-        if(DashboardManager.doesSiteAlreadyExist(currentSiteName)) {
+        if (DashboardManager.doesSiteAlreadyExist(currentSiteName)) {
             //RAISE ERROR SITE ALREADY EXIST
             $('.stepper').destroyFeedback();
             $('#site_name').showError("Site already exist");
@@ -115,6 +157,28 @@
             $('.stepper').nextStep();
         }
     }
+
+    ///
+    /// Use navbar checkbox. If the user wants to use the navbar (check the checkbox) show the various options available
+    ///
+    $("#should_use_navbar").click(function () {
+        if ($(this).is(":checked")) {
+            //SHOW
+            Materialize.updateTextFields();
+            $("#navbar_info").css({
+                "display": "block"
+
+            });
+        } else {
+            $("#navbar_info").css({
+                "display": "none"
+            });
+        }
+    });
+
+    $(document).ready(function () {
+        Materialize.updateTextFields();
+    });
 
     $(function () {
         $('.stepper').activateStepper();
