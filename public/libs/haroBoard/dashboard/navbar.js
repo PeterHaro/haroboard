@@ -3,6 +3,7 @@
 function Navbar() {
     this.alignement = Navbar.Alignment.LEFT;
     this.logo = null;
+    this.isLogoCentered = false;
     this.brandLink = null;
     this.shouldShowActiveLink = true;
     this.isExtendedWithTabs = false;

@@ -11,8 +11,18 @@
     <!--Import Materialize-Stepper CSS -->
     <link rel="stylesheet" href="./../../../public/libs/materialize-stepper-2.1.4/materialize-stepper.min.css">
 
+    <!-- Animated modal css -->
+    <link rel="stylesheet" href="./../../../public/styles/libs/animate-modal.css">
+    <link rel="stylesheet" href="./../../../public/styles/libs/normalize.css">
+
+
     <!-- //TODO MOVE EVERYTHING HERE TO SCSS -->
     <style>
+
+        .align-checkbox-to-input {
+            padding-top: 40px;
+            padding-left: 40px;
+        }
 
         .btn, .btn-large {
             background-color: #2196F3;
@@ -29,6 +39,26 @@
 
         #navbar_info {
             display: none;
+        }
+
+        #btn-close-modal {
+            width: 100%;
+            text-align: center;
+            cursor: pointer;
+            color: #fff;
+        }
+
+        /* OVERRIDES DEFAULT MODAL BEHAVIOUR AND LOOK */
+        /*  .modal {
+              max-height: 100%;
+          } */
+
+        md-dialog.fullscreen-dialog {
+            max-width: 100%;
+            max-height: 100%;
+            width: 100%;
+            height: 100%;
+            border-radius: 0;
         }
 
     </style>
@@ -63,35 +93,19 @@
                             <li class="step">
                                 <div class="step-title waves-effect waves-dark">Navbar</div>
                                 <div class="step-content">
-                                    The navbar is an important part of personalizing your site, however, it is not
-                                    required for the dashboard to work
-                                    <p>
+                                    <p>The navbar is an important part of personalizing your site, however, it is not
+                                        required for the dashboard to work
+                                    </p>
+                                    <br>
+                                    <div class="row">
                                         <input type="checkbox" id="should_use_navbar"/>
                                         <label for="should_use_navbar">Use Navbar</label>
-                                    </p>
+                                    </div>
                                     <!-- NAVBAR INFO -->
-                                    <br>
                                     <div class="row" id="navbar_info">
-                                        <form class="col s12">
-                                            <div class="row">
-                                                <div class="input-field col s6">
-                                                    <i class="material-icons prefix">title</i>
-                                                    <input placeholder="brand_name" id="title_prefix" type="text" class="validate">
-                                                    <label for="title_prefix">Navbar title</label>
-                                                </div>
-                                                <!--                                                 <form action="#">
-                                                    <div class="file-field input-field">
-                                                        <div class="btn">
-                                                            <span>Logo</span>
-                                                            <input type="file">
-                                                        </div>
-                                                        <div class="file-path-wrapper">
-                                                            <input class="file-path validate" type="text">
-                                                        </div>
-                                                    </div>
-                                                </form> -->
-                                            </div>
-                                        </form>
+                                        <a class="waves-effect waves-light btn-large">Preview Navbar</a>
+                                        <a class="waves-effect waves-light btn-large" href="#edit_navbar_modal">Edit
+                                            Navbar</a>
                                     </div>
 
                                     <div class="row">
@@ -127,6 +141,76 @@
         </div>
     </div>
 </div>
+
+<!-- Navbar edit modal -->
+<div id="edit_navbar_modal" class="modal modal-close modal-fixed-footer">
+    <div class="edit_navbar_modal-content">
+        <h4>Edit Navbar</h4>
+        <div class="row">
+            <h5>
+                Preview of the Navbar
+            </h5>
+            <nav>
+                <div id="navbar_preview_prev" class="nav-wrapper">
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
+                <i class="material-icons prefix">title</i>
+                <input placeholder="brand_name" id="title_prefix" type="text" class="validate">
+                <label for="title_prefix">Navbar title</label>
+            </div>
+            <div class="col s6 align-checkbox-to-input" style="padding-left: 40px; padding-top: 40px;">
+                <!-- TODO: FIXME: This style needs to be migrated to css/scss -->
+                <input type="checkbox" id="isNavbarCentered"/>
+                <label for="isNavbarCentered">Center title</label>
+            </div>
+        </div>
+        <div class="section">
+            <h1>Components</h1>
+            <div class="divider"></div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <!-- Promo Content 1 goes here -->
+                    <input placeholder="Component name" id="first_name" type="text" class="validate">
+                    <label for="first_name">Name</label>
+                </div>
+                <div class="col s4">
+                    <!-- Promo Content 2 goes here -->
+                      <a class='dropdown-button btn' href='#' data-activates='dropdown1'>Drop Me!</a>
+                    <ul id='dropdown1' class='dropdown-content'>
+                        <li><a href="#!">one</a></li>
+                        <li><a href="#!">two</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#!">three</a></li>
+                        <li><a href="#!"><i class="material-icons">view_module</i>four</a></li>
+                        <li><a href="#!"><i class="material-icons">cloud</i>five</a></li>
+                    </ul>
+                </div>
+                <div class="col s2">
+                    <!-- Promo Content 3 goes here -->
+                    <a class="waves-effect waves-light btn">Add component</a>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <p>
+                a
+            </p>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Save</a>
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancel</a>
+    </div>
+</div>
+
+
 </body>
 
 <!-- jQuery -->
@@ -141,7 +225,15 @@
 <script src="./../../../public/libs/haroBoard/haroboardUtility.js"></script>
 <!-- Dashboard manager -->
 <script src="./../../../public/libs/haroBoard/dashboard/dashboard_manager.js"></script>
+<!-- Navbar -->
+<script src="./../../../public/libs/haroBoard/dashboard/navbar.js"></script>
+
 <script>
+
+    //__BEGIN_GLOBAL_VARIABLES_
+    var isNavbarInitialized = false;
+    var navbar = new Navbar();
+    //__END_GLOBAL_VARIABLES
 
     //
     // validateSiteName
@@ -156,6 +248,25 @@
         } else {
             $('.stepper').nextStep();
         }
+    }
+
+    function initializeModals() {
+        $("#edit_navbar_modal").modal({
+                dismissible: false, // Modal can be dismissed by clicking outside of the modal
+                opacity: .2, // Opacity of modal background
+                inDuration: 300, // Transition in duration
+                outDuration: 200, // Transition out duration
+                startingTop: '4%', // Starting top style attribute
+                endingTop: '10%', // Ending top style attribute
+                ready: function (modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
+                    alert("Ready");
+                    console.log(modal, trigger);
+                },
+                complete: function () {
+                    alert('Closed');
+                } // Callback for Modal close
+            }
+        );
     }
 
     ///
@@ -178,12 +289,68 @@
 
     $(document).ready(function () {
         Materialize.updateTextFields();
+        $(".modal").modal();
+        initializeInputFieldsForNavbar();
     });
 
     $(function () {
         $('.stepper').activateStepper();
     });
 
+    //__BEGIN_NAVBAR_
+    function updateTitle(title) {
+        console.log(title);
+        navbar.title = title;
+        if ($("#navbar_preview_prev .brand-logo").length > 0) {
+            $(".brand-logo").text(title);
+        } else {
+            $("#navbar_preview_prev").append('<a href="#" class="brand-logo">' + title + '</a>');
+        }
+    }
+
+    var timeout = null;
+    function initializeInputFieldsForNavbar() {
+        if (isNavbarInitialized) {
+            return;
+        }
+
+        clearTimeout(timeout);
+        var inputField = document.getElementById("title_prefix");
+        inputField.onkeyup = function (e) {
+            timeout = setTimeout(function () {
+                updateTitle(inputField.value);
+            }, 500);
+        };
+        isNavbarInitialized = true;
+    }
+
+    ///
+    /// Center navbar title. If the user want the title in the navbar to be centered(check the checkbox)
+    ///
+    $("#isNavbarCentered").click(function () {
+        if ($("#navbar_preview_prev .brand-logo").length > 0) {
+            if ($(this).is(":checked")) {
+                $(".brand-logo").addClass("center");
+            } else {
+                $(".brand-logo").removeClass("center");
+            }
+        }
+    });
+
+    function expandAll() {
+        $(".collapsible-header").addClass("active");
+        $(".collapsible").collapsible({accordion: false});
+    }
+
+    function collapseAll() {
+        $(".collapsible-header").removeClass(function () {
+            return "active";
+        });
+        $(".collapsible").collapsible({accordion: true});
+        $(".collapsible").collapsible({accordion: false});
+    }
+
+    //__END_NAVBAR_
 </script>
 
 </html>
