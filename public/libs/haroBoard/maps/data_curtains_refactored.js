@@ -731,16 +731,16 @@ var data_curtain = function () {
     });
 
 
-        //Variable Initalizations
-        var layers = viewer.scene.imageryLayers;
-        var tempEntity, dateString, eId;
-        var scene = viewer.scene;
-        var ellipsoid = scene.globe.ellipsoid;
-        handler = new Cesium.ScreenSpaceEventHandler(scene.canvas);
-        var prevDate = "2015-01-01",
-            prevEId = -1,
-            firstVisualize = 0;
-        var CalipsoData, content, clickableDivs = true;
+    //Variable Initalizations
+    var layers = viewer.scene.imageryLayers;
+    var tempEntity, dateString, eId;
+    var scene = viewer.scene;
+    var ellipsoid = scene.globe.ellipsoid;
+    handler = new Cesium.ScreenSpaceEventHandler(scene.canvas);
+    var prevDate = "2015-01-01",
+        prevEId = -1,
+        firstVisualize = 0;
+    var CalipsoData, content, clickableDivs = true;
 
 
     function init() {

@@ -1,7 +1,11 @@
 @import "haroboard/color";
 @import "haroboard/variables";
-@import "haroboard/mixins";
+//@import "haroboard/mixins";
 
+//Core CSS
+@import "haroboard/materialize_side_nav";
+
+/*
 @import "haroboard/typography";
 
 // Core CSS
@@ -26,3 +30,4 @@
 @import "haroboard/responsive";
 @import "haroboard/map";
 @import "haroboard/data-curtains";
+*/

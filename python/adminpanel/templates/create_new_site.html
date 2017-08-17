@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard manager</title>
+
+    <!-- Materializecss compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import Materialize-Stepper CSS -->
+    <link rel="stylesheet" href="./../../../public/libs/materialize-stepper-2.1.4/materialize-stepper.min.css">
+
+    <!-- Animated modal css -->
+    <link rel="stylesheet" href="./../../../public/styles/libs/animate-modal.css">
+    <link rel="stylesheet" href="./../../../public/styles/libs/normalize.css">
+
+
+    <!-- //TODO MOVE EVERYTHING HERE TO SCSS -->
+    <style>
+
+        .align-checkbox-to-input {
+            padding-top: 40px;
+            padding-left: 40px;
+        }
+
+        .btn, .btn-large {
+            background-color: #2196F3;
+        }
+
+        button:focus {
+            outline: none;
+            background-color: #2196F3;
+        }
+
+        .btn:hover, .btn-large:hover {
+            background-color: #64b5f6;
+        }
+
+        #navbar_info {
+            display: none;
+        }
+
+        #btn-close-modal {
+            width: 100%;
+            text-align: center;
+            cursor: pointer;
+            color: #fff;
+        }
+
+        /* OVERRIDES DEFAULT MODAL BEHAVIOUR AND LOOK */
+        /*  .modal {
+              max-height: 100%;
+          } */
+
+        .modal.open {
+            width: 100%;
+            max-height: 100%;
+            height: 100%;
+            top: 0 !important;
+        }
+
+        .modal-content {
+            height: calc(100% - 56px);
+        }
+
+        md-dialog.fullscreen-dialog {
+            max-width: 100%;
+            max-height: 100%;
+            width: 100%;
+            height: 100%;
+            border-radius: 0;
+        }
+
+    </style>
+
+</head>
+<body>
+<div class="section grey lighten-5">
+    <div class="container">
+        <div class="row">
+            <div class="col l6 m10 s12 offset-l3 offset-m1">
+                <h3 class="light center-align blue-text">Create new dashboard</h3>
+                <div class="card hoverable">
+                    <div class="card-content">
+                        <ul data-method="GET" class="stepper horizontal">
+                            <li class="step active">
+                                <div class="step-title waves-effect waves-dark">Select name</div>
+                                <div class="step-content">
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            <input id="site_name" name="site_name" type="text" class="validate"
+                                                   required>
+                                            <label for="site_name">Please input the dashboard name</label>
+                                        </div>
+                                    </div>
+                                    <div class="step-actions">
+                                        <button class="waves-effect waves-dark btn next-step"
+                                                data-feedback="validateSiteName">Continue
+                                        </button>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="step">
+                                <div class="step-title waves-effect waves-dark">Navbar</div>
+                                <div class="step-content">
+                                    <p>The navbar is an important part of personalizing your site, however, it is not
+                                        required for the dashboard to work
+                                    </p>
+                                    <br>
+                                    <div class="row">
+                                        <input type="checkbox" id="should_use_navbar"/>
+                                        <label for="should_use_navbar">Use Navbar</label>
+                                    </div>
+                                    <!-- NAVBAR INFO -->
+                                    <div class="row" id="navbar_info">
+                                        <a class="waves-effect waves-light btn-large">Preview Navbar</a>
+                                        <a class="waves-effect waves-light btn-large" href="#edit_navbar_modal">Edit
+                                            Navbar</a>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            <input id="password" name="password" type="password" class="validate"
+                                                   required>
+                                            <label for="password">Your password</label>
+                                        </div>
+                                    </div>
+                                    <div class="step-actions">
+                                        <button class="waves-effect waves-dark btn next-step">CONTINUE</button>
+                                        <button class="waves-effect waves-dark btn-flat previous-step">BACK</button>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="step">
+                                <div class="step-title waves-effect waves-dark">Callback</div>
+                                <div class="step-content">
+                                    Unfortunately callback loading screen is not working in here =( I'll make a github
+                                    page soon!
+                                    <div class="step-actions">
+                                        <button class="waves-effect waves-dark btn next-step" data-feedback="anyThing">
+                                            ENDLESS CALLBACK!
+                                        </button>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Navbar edit modal -->
+<div id="edit_navbar_modal" class="modal modal-close modal-fixed-footer">
+    <div class="edit_navbar_modal-content container">
+        <h4>Edit Navbar</h4>
+        <div class="row">
+            <h5>
+                Preview of the Navbar
+            </h5>
+            <nav>
+                <div id="navbar_preview_prev" class="nav-wrapper">
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
+                <i class="material-icons prefix">title</i>
+                <input placeholder="brand_name" id="title_prefix" type="text" class="validate">
+                <label for="title_prefix">Navbar title</label>
+            </div>
+            <div class="col s6 align-checkbox-to-input" style="padding-left: 40px; padding-top: 40px;">
+                <!-- TODO: FIXME: This style needs to be migrated to css/scss -->
+                <input type="checkbox" id="isNavbarCentered"/>
+                <label for="isNavbarCentered">Center title</label>
+            </div>
+        </div>
+        <div class="section">
+            <h1>Components</h1>
+            <div class="divider"></div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input placeholder="Component name" id="first_name" type="text" class="validate">
+                    <label for="first_name" data-error="ID Already registered">Name</label>
+                </div>
+                <div class="input-field col s4">
+                    <select id="navbar_components_input_fields">
+                        <option value="" disabled selected>Select component type</option>
+                    </select>
+                </div>
+                <div class="col s2">
+                    <!-- Promo Content 3 goes here -->
+                    <a id="add_component_button" class="waves-effect waves-light btn">Add component</a>
+                </div>
+
+            </div>
+            <!-- Extra fields per type -->
+            <div id="component-extra-fields" class="row" style="display:none;">
+                <!-- DROPDOWN -->
+                <div class="input-field col s4">
+                    <select id="navbar_dropdown_extra_fields">
+                        <option value="" disabled selected>Select dropdown field type</option>
+
+                    </select>
+                </div>
+
+                <div class="input-field col s6">
+                    <input placeholder="Dropdown type" id="dropdown_name" type="text" class="validate">
+                    <label for="dropdown_name">Name</label>
+                </div>
+
+                <div class="input-field col s2">
+                    <a id="add_dropdown_field" class="waves-effect waves-light btn-large">Add</a>
+                </div>
+            </div>
+            <div id="component-extra-fields-links" style="display:none;">
+                <!-- Links -->
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input placeholder="My link" id="link_name" type="text" class="validate">
+                        <label for="link_name">Link name</label>
+                    </div>
+
+                    <div class="input-field col s6">
+                        <input placeholder="https://Mylink.com" id="link_href_input_holder" type="text"
+                               class="validate">
+                        <label for="link_href_input_holder">Href</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s8">
+                        <select id="material_icons_selector" class="icons">
+                            <option class="circle" value="" disabled selected>Select icon here</option>
+                            <option class="circle" value="" selected>No icon selected</option>
+
+                        </select>
+                        <label>Icons</label>
+                    </div>
+
+                    <div class="col s4 align-checkbox-to-input" style="padding-left: 40px;padding-top: 40px;">
+                        <input type="checkbox" id="align_right"/>
+                        <label for="align_right">Align right</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <!-- Components list -->
+            <table id="components_table" class="highlight">
+                <thead>
+                <tr>
+                    <th class="col s5">Name</th>
+                    <th class="col s5">Type</th>
+                    <th class="col s2">Delete</th>
+                </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Save</a>
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancel</a>
+    </div>
+</div>
+
+
+</body>
+
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<!-- Materializecss compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
+<!-- jQueryValidation Plugin (optional) -->
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
+<!--Import Materialize-Stepper JavaScript -->
+<script src="./../../../public/libs/materialize-stepper-2.1.4/materialize-stepper.min.js"></script>
+<!-- Haroboard Utility -->
+<script src="./../../../public/libs/haroBoard/haroboardUtility.js"></script>
+<!-- Dashboard manager -->
+<script src="./../../../public/libs/haroBoard/dashboard/dashboard_manager.js"></script>
+<!-- Navbar -->
+<script src="./../../../public/libs/haroBoard/dashboard/navbar.js"></script>
+<!-- Base Compoenents, should probably remove navbar dependency from here -->
+<script src="./../../../public/libs/haroBoard/dashboard/base_components.js"></script>
+
+<script>
+
+    //__BEGIN_GLOBAL_VARIABLES_
+    var isNavbarInitialized = false;
+    var navbar = new Navbar();
+    //__END_GLOBAL_VARIABLES
+
+    //
+    // validateSiteName
+    // Validates the site name, for instance check if it exists, supposed to more, raise error if exists etc
+    //
+    function validateSiteName() {
+        var currentSiteName = document.getElementById("site_name").value;
+        if (DashboardManager.doesSiteAlreadyExist(currentSiteName)) {
+            //RAISE ERROR SITE ALREADY EXIST
+            $('.stepper').destroyFeedback();
+            $('#site_name').showError("Site already exist");
+        } else {
+            $('.stepper').nextStep();
+        }
+    }
+
+    function initializeModals() {
+        $("#edit_navbar_modal").modal({
+                dismissible: false, // Modal can be dismissed by clicking outside of the modal
+                opacity: .2, // Opacity of modal background
+                inDuration: 300, // Transition in duration
+                outDuration: 200, // Transition out duration
+                startingTop: '4%', // Starting top style attribute
+                endingTop: '10%', // Ending top style attribute
+                ready: function (modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
+                    alert("Ready");
+                    console.log(modal, trigger);
+                },
+                complete: function () {
+                    alert('Closed');
+                } // Callback for Modal close
+            }
+        );
+    }
+
+    ///
+    /// Use navbar checkbox. If the user wants to use the navbar (check the checkbox) show the various options available
+    ///
+    $("#should_use_navbar").click(function () {
+        if ($(this).is(":checked")) {
+            //SHOW
+            Materialize.updateTextFields();
+            $("#navbar_info").css({
+                "display": "block"
+
+            });
+        } else {
+            $("#navbar_info").css({
+                "display": "none"
+            });
+        }
+    });
+
+    ///
+    /// Link alignment checkbox
+    ///
+    $("#align_right").click(function () {
+        if ($(this).is(":checked")) {
+
+        } else {
+
+        }
+    });
+
+    function refreshAddedComponentsTable() {
+
+    }
+
+    function addNewComponentToNavbar(component) {
+        if (navbar === null || component === null) {
+            return;
+        }
+
+        var reALignLink = false;
+        if ($("#align_right").is(":checked")) {
+            reALignLink = true;
+            component.logo.alignment = "right";
+        } else {
+            component.logo.alignment = "left";
+        }
+
+        //THE UL IS NAV-MOBILE SO DO THE ALIGNEMENT FOR ALL LINKS THERE
+        navbar.AddComponent(component);
+        if (component.logo === "none-selected") {
+            $("#nav-mobile").append('<li><a href="' + component.href + '"' + 'id="' + component.itemName + '"'
+                + '>' + component.name + '</a></li>'
+            );
+        } else {
+            if (component.logo.alignment === "left") {
+                $("#nav-mobile").append('<li><a href="' + component.href + '"' + 'id="' + component.itemName + '"'
+                    + '><i class="material-icons left">' + component.logo.logo + '</i>' + component.name + '</a></li>'
+                );
+            } else if (component.logo.alignment === "right") {
+                $("#nav-mobile").append('<li><a href="' + component.href + '"' + 'id="' + component.itemName + '"'
+                    + '><i class="material-icons right">' + component.logo.logo + '</i>' + component.name + '</a></li>'
+                );
+            }
+        }
+
+        //REfresh Table TODO:: IMPORTANT ADD ID FOR ROW CORRESPONDING TO COMPONENTS, PROBABLY NEED INTERFACE GetId();
+        $("#components_table").find("> tbody:last-child").append(
+            '<tr id="' + component.getId() + '">'
+            + '<td class="col s5">' + component.name + '</td>'
+            + '<td class="col s5">' + component.type + '</td>'
+            + '<td class="col s2" onclick="deleteRow(this)"> <i class="small material-icons delete-row-icon">delete forever</i></td>'
+            + '</tr>'
+        );
+
+        //Everything is ok, clear fields and close type reset select
+        $("#first_name").val("");
+        $("#link_name").val("");
+        $("#link_href_input_holder").val("");
+        $("#material_icons_selector").val("");
+    }
+
+    function raiseOrRemoveError(component) {
+        component.addClass("invalid");
+    }
+
+    function intializeAddComponentButton() {
+        $("#add_component_button").click(function () {
+            var input = $("#navbar_components_input_fields");
+            switch (input.val()) {
+                case "LINK":
+                    console.log("Adding link or link with icon");
+                    var item = new ListItemWithLink();
+                    var componentId = $("#first_name").val();
+                    for (var component in navbar.components) {
+                        if (componentId === navbar.components[component].itemName) {
+                            raiseOrRemoveError($("#first_name"));
+                            return;
+                        }
+                    }
+                    if (!item.addItemName($("#first_name").val())) {
+                        // Raise error
+                        raiseOrRemoveError($("#first_name"));
+                        return;
+                    }
+
+                    if (!item.addName($("#link_name").val())) {
+                        //Raise error
+                        raiseOrRemoveError($("#link_name"));
+                        return;
+                    }
+                    item.href = $("#link_href_input_holder").val();
+
+                    //Add component
+                    item.addLogo($("#material_icons_selector").val());
+                    addNewComponentToNavbar(item);
+                    break;
+                case "SEARCH_BAR":
+                    console.log("Adding link with icon");
+                    break;
+                case "BUTTON":
+                    console.log("Adding button link");
+                    break;
+                case "ICON_LINK":
+                    console.log("Adding iconLink");
+                    break;
+                case "DROPDOWN":
+                    console.log("Adding dropdown");
+                    break;
+                default:
+                    Materialize.toast('Please select a valid component', 1000);
+                    console.log("Invalid selection got component val: ");
+                    console.log(input.val());
+
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        Materialize.updateTextFields();
+        $(".modal").modal();
+        initializeInputFieldsForNavbar();
+        intializeAddComponentButton();
+
+    });
+
+    $(function () {
+        $('.stepper').activateStepper();
+    });
+
+    function classy() {
+        alert("A");
+    }
+
+    //__BEGIN_NAVBAR_
+    function updateTitle(title) {
+        navbar.title = title;
+        if ($("#navbar_preview_prev .brand-logo").length > 0) {
+            $(".brand-logo").text(title);
+        } else {
+            $("#navbar_preview_prev").append('<a href="#" class="brand-logo">' + title + '</a>');
+        }
+    }
+
+    function deleteRow(currentRow) {
+        //Remove entry from components
+
+
+        var i = currentRow.parentNode.rowIndex;
+        document.getElementById('components_table').deleteRow(i);
+    }
+
+    var timeout = null;
+
+    function initializeInputFieldsForNavbar() {
+        if (isNavbarInitialized) {
+            return;
+        }
+
+        clearTimeout(timeout);
+        var inputField = document.getElementById("title_prefix");
+        inputField.onkeyup = function (e) {
+            timeout = setTimeout(function () {
+                updateTitle(inputField.value);
+            }, 500);
+        };
+
+        populateNavbarDropdownComponentsInSelector();
+        populate_material_icons_selector();
+
+        $("#add_dropdown_field").click(function () {
+            toggleSelectComponentDisplays(null);
+        });
+
+        $('select').material_select(); //This activates _ALL_ selector in the stepper. So it must be done right before finalization
+        isNavbarInitialized = true;
+    }
+
+    ///
+    /// Center navbar title. If the user want the title in the navbar to be centered(check the checkbox)
+    ///
+    $("#isNavbarCentered").click(function () {
+        if ($("#navbar_preview_prev .brand-logo").length > 0) {
+            if ($(this).is(":checked")) {
+                $(".brand-logo").addClass("center");
+            } else {
+                $(".brand-logo").removeClass("center");
+            }
+        }
+    });
+
+    function expandAll() {
+        $(".collapsible-header").addClass("active");
+        $(".collapsible").collapsible({accordion: false});
+    }
+
+    function collapseAll() {
+        $(".collapsible-header").removeClass(function () {
+            return "active";
+        });
+        $(".collapsible").collapsible({accordion: true});
+        $(".collapsible").collapsible({accordion: false});
+    }
+
+    //TODO: IMPLEMENT ME
+    function toggleSelectComponentDisplays(object) {
+
+        toggleDisplay($("#component-extra-fields"), "none");
+        toggleDisplay($("#component-extra-fields-links"), "none");
+        if (object !== null) {
+            toggleDisplay(object, "block");
+        }
+    }
+
+    function toggleDisplay(object, display) {
+        object.css({
+            "display": display
+        });
+    }
+
+    function b64toBlob(b64Data, contentType, sliceSize) {
+        contentType = contentType || '';
+        sliceSize = sliceSize || 512;
+
+        var byteCharacters = atob(b64Data);
+        var byteArrays = [];
+
+        for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+            var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+            var byteNumbers = new Array(slice.length);
+            for (var i = 0; i < slice.length; i++) {
+                byteNumbers[i] = slice.charCodeAt(i);
+            }
+
+            var byteArray = new Uint8Array(byteNumbers);
+
+            byteArrays.push(byteArray);
+        }
+
+        var blob = new Blob(byteArrays, {type: contentType});
+        return blob;
+    }
+
+    function populate_material_icons_selector() {
+        var selector = document.getElementById("material_icons_selector");
+        var iconList = DashboardManager.getAllRegisteredLogos();
+        for (var iconName in iconList) {
+            var optionElement = document.createElement("option");
+            optionElement.setAttribute("value", iconName);
+            var blob = b64toBlob(iconList[iconName], "image/png");
+            var blobUrl = URL.createObjectURL(blob);
+            optionElement.setAttribute("data-icon", blobUrl);
+            optionElement.setAttribute("class", "circle");
+            optionElement.appendChild(document.createTextNode(iconName));
+            selector.appendChild(optionElement);
+        }
+    }
+
+    function populateNavbarDropdownComponentsInSelector() {
+        var dropdownListWithComponents = document.getElementById("navbar_components_input_fields");
+        var dropdownComponentsForTheNavbarDropdownLists = document.getElementById("navbar_dropdown_extra_fields");
+        //NAVBAR COMPONENTS
+        for (var navbarComponentType in Navbar.ComponentTypes) {
+            var optionElement = document.createElement("option");
+            optionElement.setAttribute("value", navbarComponentType);
+            optionElement.appendChild(document.createTextNode(Navbar.ComponentTypes[navbarComponentType]));
+            dropdownListWithComponents.appendChild(optionElement);
+        }
+
+        $("#navbar_components_input_fields").change(function () {
+            switch ($(this).val()) {
+                case "LINK":
+                    toggleSelectComponentDisplays($("#component-extra-fields-links"));
+                    break;
+                case "SEARCH_BAR":
+                    break;
+                case "BUTTON":
+                    break;
+                case "ICON_LINK":
+                    break;
+                case "DROPDOWN":
+                    toggleSelectComponentDisplays($("#component-extra-fields"))
+                    break;
+                default:
+                    console.log($(this).val());
+            }
+        });
+
+        //NAVBAR DROPDOWN TYPES
+        for (var navbarDropdownComponentTypeIndex in Navbar.DropdownTypes) {
+            var optionElement = document.createElement("option");
+            optionElement.setAttribute("value", navbarComponentType);
+            optionElement.appendChild(document.createTextNode(Navbar.ComponentTypes[navbarDropdownComponentTypeIndex]));
+            dropdownComponentsForTheNavbarDropdownLists.appendChild(optionElement);
+        }
+    }
+
+    //__END_NAVBAR_
+</script>
+
+</html>

@@ -23,6 +23,7 @@
     <link rel="stylesheet" type="text/css" href="./styles/styles.min.css"/>
     <link rel="stylesheet" type="text/css" href="./styles/pe-icon-7-stroke.css">
     <link rel="stylesheet" type="text/css" href="./styles/libs/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="./libs/font-awesome-4.7.0/css/font-awesome.min.css">
 
     <!-- Cesium -->
     <style>
@@ -376,6 +377,191 @@
             text-transform: uppercase;
         }
 
+        /* DETAILS PANEL */
+        .marker-list {
+            max-height: 300px;
+            overflow: auto;
+            padding-bottom: 0;
+            display: none;
+        }
+
+        .marker-list h5 {
+            margin: 5px 0;
+            font-size: 12px;
+        }
+
+        .marker-list h5 i {
+            color: #1982D1;
+        }
+
+        .marker-list ol, .marker-list ul {
+            margin: 3px 0;
+            padding: 0 0 0 25px;
+            font-size: 10px;
+            color: #777;
+            cursor: pointer;
+        }
+
+        .marker-list li, .marker-list h3 {
+            margin: 0;
+            line-height: 16px;
+        }
+
+        .marker-list h3:hover {
+            color: #1982D1;
+        }
+
+        .details {
+            background: #FFF;
+            color: #222222;
+            padding: 10px 20px 20px 20px;
+            box-sizing: border-box;
+            font-size: 12px;
+            border: 1px solid rgba(0, 0, 0, 0.3);
+        }
+
+        .details .header {
+            font-weight: 700;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .details .header:not(:first-child) {
+            margin-top: 1.3rem;
+        }
+
+        .details .header i {
+            color: #1982D1;
+        }
+
+        .details span {
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+        .details span img {
+            max-width: 100%;
+        }
+
+        .details-bottom-content {
+            padding: 10px;
+            font-weight: 700;
+        }
+
+        .darkwell {
+            background: #DDD;
+            padding: 15px;
+            margin-top: 10px;
+            border: 1px solid #777;
+        }
+
+        .menu-left {
+            float: left !important;
+        }
+
+        /* nSlider */
+        input[type=range] {
+            -webkit-appearance: none;
+            margin: 10px 0;
+            width: 100%;
+        }
+
+        input[type=range]:focus {
+            outline: none;
+        }
+
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 8.4px;
+            cursor: pointer;
+            animate: 0.2s;
+            box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+            background: #3071a9;
+            border-radius: 1.3px;
+            border: 0.2px solid #010101;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+            border: 1px solid #000000;
+            height: 36px;
+            width: 16px;
+            border-radius: 3px;
+            background: #ffffff;
+            cursor: pointer;
+            -webkit-appearance: none;
+            margin-top: -14px;
+        }
+
+        input[type=range]:focus::-webkit-slider-runnable-track {
+            background: #367ebd;
+        }
+
+        input[type=range]::-moz-range-track {
+            width: 100%;
+            height: 8.4px;
+            cursor: pointer;
+            animate: 0.2s;
+            box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+            background: #3071a9;
+            border-radius: 1.3px;
+            border: 0.2px solid #010101;
+        }
+
+        input[type=range]::-moz-range-thumb {
+            box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+            border: 1px solid #000000;
+            height: 36px;
+            width: 16px;
+            border-radius: 3px;
+            background: #ffffff;
+            cursor: pointer;
+        }
+
+        input[type=range]::-ms-track {
+            width: 100%;
+            height: 8.4px;
+            cursor: pointer;
+            animate: 0.2s;
+            background: transparent;
+            border-color: transparent;
+            border-width: 16px 0;
+            color: transparent;
+        }
+
+        input[type=range]::-ms-fill-lower {
+            background: #2a6495;
+            border: 0.2px solid #010101;
+            border-radius: 2.6px;
+            box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+        }
+
+        input[type=range]::-ms-fill-upper {
+            background: #3071a9;
+            border: 0.2px solid #010101;
+            border-radius: 2.6px;
+            box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+        }
+
+        input[type=range]::-ms-thumb {
+            box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+            border: 1px solid #000000;
+            height: 36px;
+            width: 16px;
+            border-radius: 3px;
+            background: #ffffff;
+            cursor: pointer;
+        }
+
+        input[type=range]:focus::-ms-fill-lower {
+            background: #3071a9;
+        }
+
+        input[type=range]:focus::-ms-fill-upper {
+            background: #367ebd;
+        }
+
 
     </style>
 
@@ -387,10 +573,33 @@
     your browser</a> to improve your experience.</p>
 <![endif]-->
 
-<div id="cesiumContainer">
+<div id="cesiumContainer"></div>
+<div class="choose-imagery-date" title="Choose Imagery Date">
+    <input type="text" value="" class="datepicker picker__input" id="datepicker" name="date" readonly=""
+           aria-haspopup="true" aria-expanded="false" aria-readonly="false" aria-owns="datepicker_root">
 </div>
+<div class="choose-imagery-date-cap" title="Choose Imagery Date"></div>
+<div id="pb">
+    <h3 id="mordi" style="margin-top: 50px; background-color: white">Turn on data-curtain Demo</h3>
+    <div id="pb-body-wrapper" style="visibility: hidden;">
+        <div id="pb_head"><h3>Profile Browser</h3></div>
+        <div id="pb_list" class="scroll-pane horizontal-only"><p>
+            <div id="pb_list_items"></div>
+            </p></div>
+
+        <div id="pb_toggle">
+            <input id="myButton" style="border-radius:5px;
+border-bottom-right-radius:5px;" type="button" value="Toggle Orbital Tracks" onClick="curtain.toggleMarkers();"/>
+            <input id="myButton" style="margin-top:5px; border-bottom-left-radius:5px;
+border-bottom-right-radius:5px;" type="button" value="Toggle Day/Night Orbits" onClick="curtain.toggleDN();"/>
+        </div>
+    </div>
+</div>
+
+
 <div id="baseLayerPickerContainer" style="position:absolute;top:24px;right:24px;width:38px;height:38px;"></div>
-<section id="open-menu" class="material-design-hamburger" class="layer-menu-toggle" title="Click here to open the application menu">
+<section id="open-menu" class="material-design-hamburger" class="layer-menu-toggle"
+         title="Click here to open the application menu">
     <button class="material-design-hamburger__icon">
         <span class="material-design-hamburger__layer" data-color="blue"></span>
     </button>
@@ -416,14 +625,15 @@
         <p class="instruct active-layers-label">Active Layers</p>
         <div id="active-layers" class="map-layers"></div>
         <div id="base"></div>
-        <div class="cv-learn">
-        </div>
     </div>
+</div>
 </div>
 
 </body>
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.migrate/1.2.1/jquery-migrate.min.js"></script>
 <script src="./libs/lodash.4.17.4/lodash.min.js"></script>
+<script type="text/javascript" src="./libs/pickadate-3.5.6/combined.js"></script> <!-- TODO: MIGRATE AWAY FROM ME -->
 <script src="./libs/graphlib.2.1.1/graphlib.min.js"></script>
 <script src="./libs/haroBoard/maps/Cesium/haroboard/nobject_graph_injection.js"></script>
 <script src="./libs/haroBoard/maps/Cesium/Cesium.js"></script>
@@ -431,8 +641,21 @@
 <script src="./libs/haroBoard/maps/Cesium/haroboard/layers_configuration.js"></script>
 <script src="./libs/haroBoard/maps/cesium_map.js"></script>
 <script src="./libs/haroBoard/material_design/hamburger.js"></script>
+<script src="./libs/haroBoard/maps/data-curtains-standalone.js"></script>
 <script>
     materialDesignHamburger();
+
+    $(document).ready(function () {
+        $("#mordi").click(function (e) {
+            $(this).hide();
+            var curtain = new data_curtain(cesiumWidget);
+            curtain.init();
+            $("#pb-body-wrapper").css('visibility','visible');
+        });
+    });
+
+    //    var curtain = new data_curtain(cesiumWidget);
+    //  curtain.init();
 </script>
 
 </html>

@@ -61,6 +61,7 @@
     "dashboard",
     "monitor",
     "maps",
-    "cesium-viewer"
+    "cesium-viewer",
+    "graphs"
   ]
 }
